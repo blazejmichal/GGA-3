@@ -7,29 +7,26 @@ import model.Node.NODE_TYPE;
 
 public class Task {
 
+  private List<Point> input = Lists.newArrayList();
   public Region treeRegion = new Region(
       0.0,
-      10.0,
       0.0,
-      10.0
+      0.0,
+      0.0
   );
-  public Region queryRegion;
-  private List<Point> input = Lists.newArrayList();
+  private Region queryRegion;
   private Node tree;
   private List<Point> reportedLeaves = Lists.newLinkedList();
   private List<Node> reportedSubtrees = Lists.newLinkedList();
-
-  public Task(List<Point> input) {
-    this.input = input;
-    this.run();
-  }
+  private Long timeInMiliseconds = 0L;
 
   // gdzie new Region(x1, x2, y1, y2) && x1 <= x2 && y1 <= y2
   public Task(
-      List<Point> input,
+      Input input,
       Region queryRegion
   ) {
-    this.input = input;
+    this.input = input.getPoints();
+    this.treeRegion = input.getRegion();
     this.queryRegion = queryRegion;
     this.run();
   }
@@ -37,14 +34,16 @@ public class Task {
   public void run() {
 
     try {
-    this.validate();
-    this.tree = this.buildKdTree(
-        this.input,
-        0
-    );
-    this.tree.setRegion(this.treeRegion);
-    this.defineRegion(this.tree);
-    this.checkAffiliationToQueryRegion(this.tree);
+      long start = System.currentTimeMillis();
+      this.validate();
+      this.tree = this.buildKdTree(
+          this.input,
+          0
+      );
+      this.tree.setRegion(this.treeRegion);
+      this.defineRegion(this.tree);
+      this.checkAffiliationToQueryRegion(this.tree);
+      this.timeInMiliseconds = System.currentTimeMillis() - start;
     } catch (Exception exception) {
       System.out.println(exception.getMessage());
     }
