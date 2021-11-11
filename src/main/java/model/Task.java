@@ -8,20 +8,19 @@ import service.RegionComparator;
 
 public class Task {
 
-  private List<Point> input = Lists.newArrayList();
   public Region treeRegion = new Region(
       0.0,
       0.0,
       0.0,
       0.0
   );
+  private List<Point> input = Lists.newArrayList();
   private Region queryRegion;
   private Node tree;
   private List<Point> reportedLeaves = Lists.newLinkedList();
   private List<Node> reportedSubtrees = Lists.newLinkedList();
   private Long timeInMiliseconds = 0L;
 
-  // gdzie new Region(x1, x2, y1, y2) && x1 <= x2 && y1 <= y2
   public Task(
       Input input,
       Region queryRegion
@@ -32,6 +31,9 @@ public class Task {
     this.run();
   }
 
+  /**
+   * Metoda fasadowa. Uruchamia poszczegolne etapy algorytmu.
+   */
   public void run() {
 
     try {
@@ -50,6 +52,11 @@ public class Task {
     }
   }
 
+  /**
+   * Walidacja danych wejsciowych. Złożoność O(n^2)
+   *
+   * @throws Exception
+   */
   public void validate() throws Exception {
 
     this.validateAmountOfPoints();
@@ -70,6 +77,11 @@ public class Task {
     }
   }
 
+  /**
+   * Walidacja obszaru zapytania
+   *
+   * @throws Exception
+   */
   public void validateQueryRegion() throws Exception {
 
     if (this.queryRegion != null) {
@@ -80,6 +92,11 @@ public class Task {
     }
   }
 
+  /**
+   * Walidacja danych wejsciowych
+   *
+   * @throws Exception
+   */
   public void validateAmountOfPoints() throws Exception {
 
     if (this.input.size() == 0) {
@@ -87,6 +104,11 @@ public class Task {
     }
   }
 
+  /**
+   * Walidacja danych wejsciowych
+   *
+   * @throws Exception
+   */
   public void validateDifferenceOfX(
       Point left,
       Point right
@@ -97,6 +119,11 @@ public class Task {
     }
   }
 
+  /**
+   * Walidacja danych wejsciowych
+   *
+   * @throws Exception
+   */
   public void validateDifferenceOfY(
       Point left,
       Point right
@@ -107,6 +134,12 @@ public class Task {
     }
   }
 
+  /**
+   * Budowanie kd drzewa na podstawie punktow z argumentu metody. Złozoność O(n).
+   *
+   * @param points
+   * @param d
+   */
   public Node buildKdTree(
       List<Point> points,
       Integer d
@@ -158,6 +191,12 @@ public class Task {
     return newNode;
   }
 
+  /**
+   * Liczenie mediany z punktow wzgledem osi x lub y z argumentu
+   *
+   * @param axis
+   * @param points
+   */
   public Double calculateMedian(
       Integer axis,
       List<Point> points
@@ -168,6 +207,11 @@ public class Task {
     return median;
   }
 
+  /**
+   * Liczenie mediany punktow wzgledem osi x
+   *
+   * @param points
+   */
   public Double calculateMedianByX(
       List<Point> points
   ) {
@@ -181,6 +225,11 @@ public class Task {
     return median;
   }
 
+  /**
+   * Liczenie mediany punktow wzgledem osi y
+   *
+   * @param points
+   */
   public Double calculateMedianByY(
       List<Point> points
   ) {
@@ -194,6 +243,11 @@ public class Task {
     return median;
   }
 
+  /**
+   * Sortowanie po osi x
+   *
+   * @param points
+   */
   public void sortByX(List<Point> points) {
 
     points.sort((p1, p2) -> {
@@ -207,6 +261,11 @@ public class Task {
     });
   }
 
+  /**
+   * Sortowanie po osi y
+   *
+   * @param points
+   */
   public void sortByY(List<Point> points) {
 
     Collections.sort(points, (p1, p2) -> {
@@ -220,6 +279,12 @@ public class Task {
     });
   }
 
+  /**
+   * Zdefiniowanie rejonu punktow node'a z argumentu metody. Rekurencyjnie sprawdza rejony dla
+   * dzieci.
+   *
+   * @param node
+   */
   public void defineRegion(Node node) {
 
     if (!node.isLeaf()) {
@@ -259,6 +324,11 @@ public class Task {
     }
   }
 
+  /**
+   * Sprawdza czy node znajduje sie w obszarze zapytania i dodaje go do zgloszonych elementow
+   *
+   * @param node
+   */
   public void checkAffiliationToQueryRegion(Node node) {
 
     if (node.isLeaf()) {
@@ -277,6 +347,11 @@ public class Task {
     }
   }
 
+  /**
+   * Sprawdza czy lisc przynalezy do obszaru zapytania
+   *
+   * @param node
+   */
   public void checkLeafAffiliationToQueryRegion(Node node) {
 
     Boolean contained = this.containedInRegion(
@@ -290,6 +365,11 @@ public class Task {
     }
   }
 
+  /**
+   * Sprawdza czy poddrzewo znajduje sie w obszarze zapytania
+   *
+   * @param node
+   */
   public void checkSubtreeAffiliationToQueryRegion(Node node) {
 
     if (
@@ -315,6 +395,12 @@ public class Task {
     }
   }
 
+  /**
+   * Sprawdza czy punkt z argumentu znajduje sie danym rejonie z argumentu
+   *
+   * @param region
+   * @param point
+   */
   public Boolean containedInRegion(
       Region region,
       Point point

@@ -4,6 +4,15 @@ import model.Node.NODE_TYPE;
 
 public class NodeBuilder {
 
+  /**
+   * Stworzenie node'a na podstawie argumentów.
+   *
+   * @param location
+   * @param type
+   * @param point
+   * @param left
+   * @param right
+   */
   public Node build(
       Double location,
       NODE_TYPE type,

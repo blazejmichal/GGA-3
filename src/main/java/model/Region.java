@@ -12,6 +12,14 @@ public class Region {
   private Double minY;
   private Double maxY;
 
+  /**
+   * Stworzenie rejonu z prawodilowy przypisaniem wartosci minimalnych/maksymlanych
+   *
+   * @param minX
+   * @param maxX
+   * @param minY
+   * @param maxY
+   */
   public Region(
       Double minX,
       Double maxX,
@@ -36,6 +44,11 @@ public class Region {
     this.maxY = maxY;
   }
 
+  /**
+   * Skopiowanie wartosci z danego rejonu do instacji
+   *
+   * @param region
+   */
   public void of(Region region) {
 
     this.minX = region.getMinX();

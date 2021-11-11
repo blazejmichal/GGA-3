@@ -38,6 +38,9 @@ public class RegionComparator {
     );
   }
 
+  /**
+   * Sprawdza czy node znajduje sie w obszarze zapytania
+   */
   public Boolean isNodeRegionContainedInQueryRegion() {
 
     boolean condition1 = this.topRightNodePoint.getX() <= this.topRightQueryPoint.getX();
@@ -49,6 +52,9 @@ public class RegionComparator {
     return result;
   }
 
+  /**
+   * Sprawdza czy node przecina obszarz zapytania
+   */
   public Boolean isNodeRegionIntersectionOfQueryRegion() {
 
     boolean condition1 = this.topRightQueryPoint.getX() < this.bottomLeftNodePoint.getX();

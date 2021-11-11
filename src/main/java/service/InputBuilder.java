@@ -19,6 +19,9 @@ public class InputBuilder {
 
   private Integer amount;
 
+  /**
+   * Tworzy liste z losowymi wartosciami oraz rejon w obrebie ktorego znajduja sie te wartosci
+   */
   public Input build() {
 
     List<Point> points = Lists.newLinkedList();
@@ -61,6 +64,9 @@ public class InputBuilder {
     return input;
   }
 
+  /**
+   * Tworzy liste z losowymi wartosciami
+   */
   public List<Double> buildListOfRandomDouble() {
 
     Set<Double> doubles = Sets.newLinkedHashSet();
