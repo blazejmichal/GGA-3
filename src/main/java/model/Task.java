@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 import model.Node.NODE_TYPE;
+import service.RegionComparator;
 
 public class Task {
 

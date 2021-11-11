@@ -17,7 +17,7 @@ import model.Region;
 @Data
 public class InputBuilder {
 
-  private Long amount;
+  private Integer amount;
 
   public Input build() {
 
@@ -64,10 +64,13 @@ public class InputBuilder {
   public List<Double> buildListOfRandomDouble() {
 
     Set<Double> doubles = Sets.newLinkedHashSet();
-    Double randomDouble;
+    double randomDouble;
+    int randomInt;
     Random random = new Random();
     while (doubles.size() != this.amount) {
-      randomDouble = random.nextDouble();
+      randomInt = random.nextInt(this.amount * 10);
+      randomInt = randomInt < 0 ? randomInt * -1 : randomInt;
+      randomDouble = randomInt;
       doubles.add(randomDouble);
     }
     List<Double> result = doubles.stream().toList();

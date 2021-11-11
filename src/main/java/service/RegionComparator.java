@@ -1,8 +1,10 @@
-package model;
+package service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.Point;
+import model.Region;
 
 @AllArgsConstructor
 @NoArgsConstructor
