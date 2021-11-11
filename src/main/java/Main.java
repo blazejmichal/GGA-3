@@ -1,6 +1,3 @@
-import com.google.common.collect.Lists;
-import model.Input;
-import model.Point;
 import model.Region;
 import model.Task;
 import service.InputBuilder;
