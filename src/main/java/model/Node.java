@@ -50,7 +50,7 @@ public class Node {
 
   @Override
   public String toString() {
-    return "Node{" + "point=" + this.point + '}';
+    return "Node";
   }
 
   public enum NODE_TYPE {
