@@ -38,7 +38,6 @@ public class Task {
 
     try {
       long start = System.currentTimeMillis();
-      this.validate();
       this.tree = this.buildKdTree(
           this.input,
           0
@@ -49,31 +48,6 @@ public class Task {
       this.timeInMiliseconds = System.currentTimeMillis() - start;
     } catch (Exception exception) {
       System.out.println(exception.getMessage());
-    }
-  }
-
-  /**
-   * Walidacja danych wejsciowych. Złożoność O(n^2)
-   *
-   * @throws Exception
-   */
-  public void validate() throws Exception {
-
-    this.validateAmountOfPoints();
-    this.validateQueryRegion();
-    for (Point leftPoint : this.input) {
-      for (Point rightPoint : this.input) {
-        if (!leftPoint.equals(rightPoint)) {
-          this.validateDifferenceOfX(
-              leftPoint,
-              rightPoint
-          );
-          this.validateDifferenceOfY(
-              leftPoint,
-              rightPoint
-          );
-        }
-      }
     }
   }
 
